@@ -4,7 +4,7 @@ Firmware-aware, offline-first static portal intended for GitHub Pages.
 
 ## Current build
 
-This repository is the portal shell and routing/UI architecture. Firmware-specific exploit assets and binary payloads are intentionally not fabricated. Add only verified assets from their upstream projects, record their versions and SHA-256 values, then test the corresponding host on real hardware.
+This repository contains a firmware-aware portal and a local snapshot of the public PSX8 host assets. The firmware folders are intentionally preserved because their AppCache manifests reference exact relative paths.
 
 ## Production flow
 

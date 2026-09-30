@@ -1,18 +1,16 @@
 CACHE MANIFEST
-# VERSION: 2026.09.005
+# VERSION: 2026.09.006
 
 CACHE:
 index.html
 css/portal.css
 js/app.js
 js/firmware.js
-js/payload.js
 js/cache.js
 js/controller.js
 data/firmware.json
 data/goldhen.json
 data/payloads.json
-assets/images/portal-image.jpg
 
 NETWORK:
 *

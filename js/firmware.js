@@ -2,80 +2,66 @@
   var FIRMWARES = [
     {
       id: "505",
-      label: "5.05",
+      label: "FW 5.05",
       range: "5.05",
-      status: "HOST DEDICADO",
-      tag: "ESTÁVEL",
+      status: "Host Dedicado",
       route: "505/index.html",
       goldhen: "GoldHEN v2.4b18",
-      confidence: "publicado",
-      desc: "Exploit WebKit direto. Rápido e estável sem necessidade de pendrive USB."
+      exploit: "WebKit Direct"
     },
     {
       id: "672",
-      label: "6.72",
+      label: "FW 6.72",
       range: "6.72",
-      status: "HOST DEDICADO",
-      tag: "ESTÁVEL",
+      status: "Host Dedicado",
       route: "672/index.html",
       goldhen: "GoldHEN v2.4b18",
-      confidence: "publicado",
-      desc: "Exploit WebKit direto. Alta taxa de sucesso sem necessidade de pendrive USB."
+      exploit: "WebKit Direct"
     },
     {
       id: "700",
-      label: "7.00 a 8.52",
+      label: "FW 7.00 - 8.52",
       range: "7.00-8.52",
-      status: "PSFREE + LAPSE",
-      tag: "COMPATÍVEL",
-      route: "700/version-selector.html",
-      goldhen: "Seletor Stable / Latest",
-      confidence: "publicado",
-      desc: "Execução via WebKit PSFree. Inclui seletor de versão do GoldHEN."
+      status: "PSFree + Lapse",
+      route: "700/index.html",
+      goldhen: "GoldHEN v2.4b18",
+      exploit: "PSFree WebKit"
     },
     {
       id: "900",
-      label: "9.00 a 9.60",
+      label: "FW 9.00 - 9.60",
       range: "9.00-9.60",
-      status: "PSFREE + POOBS4",
-      tag: "RECOMENDADO",
-      route: "900/version-selector.html",
+      status: "POOBS4 + GoldHEN",
+      route: "900/index.html",
       goldhen: "GoldHEN v2.4b18",
-      confidence: "publicado",
-      desc: "Firmware mais popular. Utiliza pendrive exfathax para carregar o GoldHEN."
+      exploit: "exfathax USB"
     },
     {
       id: "css",
-      label: "10.00 a 11.02",
+      label: "FW 10.00 - 11.02",
       range: "10.00-11.02",
-      status: "CSSFONTFACE UAF",
-      tag: "AVANÇADO",
+      status: "CSS FontFace UAF",
       route: "css/version-selector.html",
-      goldhen: "Seletor Stable / Latest",
-      confidence: "publicado",
-      desc: "Exploit WebKit via CSS Font Face UAF para consoles 10.00 até 11.02."
+      goldhen: "Stable / Latest",
+      exploit: "WebKit UAF"
     },
     {
       id: "1300",
-      label: "11.00 a 13.00",
+      label: "FW 11.00 - 13.00",
       range: "11.00-13.00",
-      status: "SLOPKIT WEBKIT",
-      tag: "PESQUISA",
+      status: "SlopKit WebKit",
       route: "1300/version-selector.html",
       goldhen: "Rota de Pesquisa",
-      confidence: "pesquisa",
-      desc: "Ambiente experimental SlopKit para análise e pesquisa de vulnerabilidades."
+      exploit: "SlopKit"
     },
     {
       id: "1352",
-      label: "13.02 a 13.52",
+      label: "FW 13.02 - 13.52",
       range: "13.02-13.52",
-      status: "SLOPKIT WEBKIT",
-      tag: "PESQUISA",
+      status: "SlopKit WebKit",
       route: "1352/index.html",
-      goldhen: "v2.4b18.12 no PSX8",
-      confidence: "pesquisa",
-      desc: "Ambiente experimental de pesquisa para firmwares 13.02 a 13.52."
+      goldhen: "v2.4b18.12",
+      exploit: "Pesquisa"
     }
   ];
 
@@ -92,35 +78,27 @@
 
   function detectRaw(){
     var ua = navigator.userAgent || "";
-    // Parâmetro de teste na URL: ?fw=9.00
+    // Parâmetro na URL para testes imediatos: ?fw=9.00 ou #9.00
     var q = (location.search || "").match(/[?&]fw=([0-9]+(?:\.[0-9]+)?)/i);
     if(q && q[1]) return { fw: q[1], simulated: true };
 
-    // Hash na URL: #9.00
     var hash = (location.hash || "").replace("#", "").match(/^([0-9]+(?:\.[0-9]+)?)$/);
     if(hash && hash[1]) return { fw: hash[1], simulated: true };
 
     // Detecção no navegador nativo do PlayStation 4:
     // Ex: "Mozilla/5.0 (PlayStation 4 9.00) AppleWebKit/605.1.15..."
-    // Ex: "Mozilla/5.0 (PlayStation 4/5.05) AppleWebKit/537.78..."
+    // Ex: "Mozilla/5.0 (PlayStation 4/9.00) AppleWebKit/605.1.15..."
     var m = ua.match(/(?:PlayStation\s*4)[\s/]+([0-9]+(?:\.[0-9]+)?)/i);
     if(m && m[1]) return { fw: m[1], simulated: false };
 
-    // Caso o console envie apenas "PlayStation 4" sem versão explícita no UA
     if(/PlayStation\s*4/i.test(ua)) return { fw: "PS4", simulated: false };
 
     return null;
   }
 
-  function detect(){
-    var info = detectRaw();
-    return info ? info.fw : null;
-  }
-
   function getSystemInfo(){
     var ua = navigator.userAgent || "";
-    var isPS4 = /PlayStation\s*4/i.test(ua);
-    var isPS5 = /PlayStation\s*5/i.test(ua);
+    var isRealPS4 = /PlayStation\s*4/i.test(ua);
     var raw = detectRaw();
     var fw = raw ? raw.fw : null;
     var simulated = raw ? raw.simulated : false;
@@ -128,21 +106,17 @@
     var matched = null;
     if(fw && fw !== "PS4"){
       matched = find(fw);
+    } else if(isRealPS4){
+      matched = find("9.00");
     }
 
-    var device = "PC / Navegador Web";
-    if(isPS4) device = "PlayStation 4 Console";
-    else if(isPS5) device = "PlayStation 5 Console";
-    else if(/Mobile|Android|iPhone|iPad/i.test(ua)) device = "Dispositivo Móvel";
-
     return {
-      isPS4: isPS4,
-      isPS5: isPS5,
+      isPS4: isRealPS4 || simulated,
+      isRealPS4: isRealPS4,
       isSimulated: simulated,
-      device: device,
+      device: isRealPS4 ? "PlayStation 4" : "PC / Navegador",
       detectedFw: fw,
-      matchedFw: matched,
-      userAgent: ua
+      matchedFw: matched
     };
   }
 
@@ -161,7 +135,6 @@
 
   w.P4Firmware = {
     list: FIRMWARES,
-    detect: detect,
     getSystemInfo: getSystemInfo,
     find: find,
     parse: parse

@@ -3,325 +3,103 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#030811">
-  <title>Portal PS4 - Roteador de Firmware & Exploit</title>
+  <meta name="theme-color" content="#0d0e12">
+  <title>PS4 Exploit Host // Auto Launcher</title>
   <link rel="stylesheet" href="css/portal.css">
 </head>
 <body>
-  <div id="app">
-    <!-- BARRA SUPERIOR -->
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">
-          <span class="p-letter">P</span><i class="four-letter">4</i>
-        </div>
-        <div class="brand-text">
-          <div class="brand-title">PORTAL PS4</div>
-          <div class="brand-sub">FIRMWARE HOST & EXPLOIT ROUTER</div>
-        </div>
+  <div class="shell">
+    <!-- BARRA SUPERIOR CONSOLE -->
+    <header class="sys-bar">
+      <div class="sys-brand">
+        <span class="sys-tag">PS4</span>
+        <span class="sys-title">HOST AUTO LAUNCHER</span>
       </div>
-
-      <nav class="topnav" aria-label="Navegação principal">
-        <button class="nav-action focusable" data-action="home">INÍCIO</button>
-        <button class="nav-action focusable" data-action="firmware">FIRMWARES</button>
-        <button class="nav-action focusable" data-action="payloads">PAYLOADS</button>
-        <button class="nav-action focusable" data-action="cache">OFFLINE</button>
-        <button class="nav-action focusable" data-action="guide">GUIA</button>
-        <button class="nav-action focusable" data-action="info">CRÉDITOS</button>
-      </nav>
-
-      <div class="status-strip">
-        <span id="fwBadge" class="badge-item"><i class="dot"></i> FW --</span>
-        <span id="cacheBadge" class="badge-item"><i class="dot"></i> CACHE --</span>
-        <span id="ghBadge" class="badge-item"><i class="dot"></i> GOLDHEN --</span>
+      <div class="sys-status">
+        <span id="statConsole" class="stat-badge">PROCURANDO...</span>
+        <span id="statCache" class="stat-badge">CACHE</span>
       </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main>
-      <!-- TELA INICIAL (HOME) -->
-      <section id="home" class="screen active home-screen">
-        <div class="hero-scene">
-          <img src="assets/images/portal-image.jpg" alt="PlayStation 4 Console" class="hero-bg-img">
-          <div class="scene-overlay"></div>
-          <div class="scene-grid"></div>
+    <main class="main-content">
+      <!-- MÓDULO 1: AUTO LAUNCHER DIRETO (DISPARADO AUTOMATICAMENTE NO PS4) -->
+      <section id="autoLaunchSec" class="box auto-box" style="display:none;">
+        <div class="box-head">
+          <span class="head-tag live">● EXPLOIT AUTO-TRIGGER</span>
+          <span class="head-sub">PLAYSTATION 4 DETECTADO</span>
+        </div>
 
-          <div class="hero-container">
-            <!-- PAINEL DE DETECÇÃO AUTOMÁTICA DE FIRMWARE -->
-            <div class="detection-hub">
-              <div class="hub-header">
-                <div id="detectPill" class="hub-pill">
-                  <span class="live-dot"></span>
-                  <span id="detectPillText">IDENTIFICANDO DISPOSITIVO...</span>
-                </div>
-                <div id="detectStatusTag" class="hub-tag">ANALISANDO</div>
-              </div>
-
-              <div class="hub-body">
-                <div class="fw-display">
-                  <div class="fw-label">FIRMWARE DO CONSOLE</div>
-                  <div id="detectFwBig" class="fw-value">--</div>
-                </div>
-
-                <div class="hub-details">
-                  <h2 id="detectTitle">Verificando firmware do sistema...</h2>
-                  <p id="detectDesc">Aguarde enquanto identificamos seu console PlayStation 4 para recomendar o exploit mais estável.</p>
-                  
-                  <div id="detectRouteBox" class="route-badge-box">
-                    <div class="route-info-row">
-                      <span class="info-label">Host Indicado:</span>
-                      <span id="routeHostName" class="info-val">--</span>
-                    </div>
-                    <div class="route-info-row">
-                      <span class="info-label">GoldHEN:</span>
-                      <span id="routeGoldHen" class="info-val">--</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- AÇÕES RÁPIDAS -->
-              <div class="hub-actions">
-                <button id="btnOpenHost" class="btn-primary focusable" data-action="host">
-                  <span class="btn-icon">⚡</span>
-                  <span id="btnHostText">CARREGAR HOST RECOMENDADO</span>
-                  <kbd class="key-hint">✖</kbd>
-                </button>
-                <button class="btn-secondary focusable" data-action="firmware">
-                  <span>OUTROS FIRMWARES</span>
-                  <kbd class="key-hint">◼</kbd>
-                </button>
-                <button class="btn-ghost focusable" data-action="guide">
-                  <span>INSTRUÇÕES</span>
-                  <kbd class="key-hint">▲</kbd>
-                </button>
-              </div>
-
-              <!-- BARRA DE SIMULAÇÃO RÁPIDA (PARA TESTES EM PC/MOBILE) -->
-              <div id="simBar" class="sim-bar" style="display: none;">
-                <span class="sim-label">Simular FW (Modo Teste PC):</span>
-                <div class="sim-chips">
-                  <button class="chip focusable" data-action="simulate" data-fw="5.05">5.05</button>
-                  <button class="chip focusable" data-action="simulate" data-fw="6.72">6.72</button>
-                  <button class="chip focusable" data-action="simulate" data-fw="7.55">7.55</button>
-                  <button class="chip focusable" data-action="simulate" data-fw="9.00">9.00</button>
-                  <button class="chip focusable" data-action="simulate" data-fw="10.01">10.01</button>
-                  <button class="chip focusable" data-action="simulate" data-fw="11.00">11.00</button>
-                  <button class="chip focusable" data-action="simulate" data-fw="13.00">13.00</button>
-                </div>
-              </div>
-            </div>
+        <div class="term-panel">
+          <div class="term-row"><span class="term-prefix">[SYSTEM]</span> Dispositivo: <b id="termDevice">PlayStation 4</b></div>
+          <div class="term-row"><span class="term-prefix">[SYSTEM]</span> Firmware Identificado: <span id="termFw" class="highlight-fw">--</span></div>
+          <div class="term-row"><span class="term-prefix">[TARGET]</span> Exploit: <span id="termHost">--</span></div>
+          <div class="term-row"><span class="term-prefix">[ROUTE]</span> Destino: <code id="termRoute">--</code></div>
+          <div class="term-row term-alert">
+            <span class="term-prefix">[ACTION]</span> Executando exploit em <b id="timerNum">2</b>s...
           </div>
-
-          <div class="scene-caption">
-            <span>PLAYSTATION 4 PORTAL</span>
-            <span id="consoleIdCaption">OFFLINE READY</span>
+          <div class="progress-track">
+            <div id="progressFill" class="progress-bar"></div>
           </div>
         </div>
 
-        <!-- CONSOLE DECK (CARDS DE ACESSO RÁPIDO) -->
-        <div class="console-deck">
-          <button class="deck-card deck-card-fw focusable" data-action="firmware">
-            <div class="deck-badge">01</div>
-            <div class="deck-icon">FW</div>
-            <div class="deck-text">
-              <b>Lista de Firmwares</b>
-              <small id="cardFw">Escolha ou altere a versão manual</small>
-            </div>
-            <span class="deck-arrow">›</span>
+        <div class="auto-actions">
+          <button id="btnLaunchNow" class="btn btn-action focusable">
+            EXECUTAR AGORA [ ✖ ]
           </button>
-
-          <button class="deck-card focusable" data-action="payloads">
-            <div class="deck-badge">02</div>
-            <div class="deck-icon">PL</div>
-            <div class="deck-text">
-              <b>Catálogo de Payloads</b>
-              <small>GoldHEN, FTP, App2USB, Dumper e Debug</small>
-            </div>
-            <span class="deck-arrow">›</span>
-          </button>
-
-          <button class="deck-card focusable" data-action="cache">
-            <div class="deck-badge">03</div>
-            <div class="deck-icon">OF</div>
-            <div class="deck-text">
-              <b>Cache Offline (AppCache)</b>
-              <small id="cardCache">Verificando memória offline...</small>
-            </div>
-            <span class="deck-arrow">›</span>
-          </button>
-
-          <button class="deck-card focusable" data-action="guide">
-            <div class="deck-badge">04</div>
-            <div class="deck-icon">GU</div>
-            <div class="deck-text">
-              <b>Guia do Exploit</b>
-              <small>Passo a passo de ativação por versão</small>
-            </div>
-            <span class="deck-arrow">›</span>
+          <button id="btnCancelAuto" class="btn btn-abort focusable">
+            CANCELAR / SELETOR MANUAL [ ⭘ ]
           </button>
         </div>
       </section>
 
-      <!-- TELA DE SELEÇÃO DE FIRMWARES -->
-      <section id="firmware" class="screen utility-screen">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">01 / SELETOR DE SISTEMA</div>
-            <h2>Todos os Firmwares Suportados</h2>
-            <p>Selecione a versão exata do seu console para carregar o exploit e os payloads corretos.</p>
-          </div>
-          <button class="btn-ghost focusable" data-action="home">← VOLTAR AO INÍCIO</button>
+      <!-- MÓDULO 2: SELETOR DIRETO DE FIRMWARES (ACESSO MANUAL IMEDIATO) -->
+      <section id="manualSec" class="box">
+        <div class="box-head">
+          <span class="head-title">SELEÇÃO DIRETA DE FIRMWARE</span>
+          <span class="head-sub" id="manualSub">Clique no firmware do seu console para executar o exploit</span>
         </div>
 
-        <div id="firmwareGrid" class="firmware-grid"></div>
-        <div id="fwDetail" class="detail-panel">Selecione uma faixa acima para ver a rota e o exploit correspondente.</div>
-      </section>
-
-      <!-- TELA DE PAYLOADS -->
-      <section id="payloads" class="screen utility-screen">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">02 / CATÁLOGO DE PAYLOADS</div>
-            <h2>Payloads e Ferramentas</h2>
-            <p>Itens compatíveis com a versão de firmware selecionada.</p>
-          </div>
-          <button class="btn-ghost focusable" data-action="home">← VOLTAR AO INÍCIO</button>
-        </div>
-        <div id="payloadGrid" class="payload-grid"></div>
-      </section>
-
-      <!-- TELA DE CACHE OFFLINE -->
-      <section id="cache" class="screen utility-screen">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">03 / ARMAZENAMENTO OFFLINE</div>
-            <h2>Cache do Navegador (AppCache)</h2>
-            <p>Mantenha este portal gravado na memória do PS4 para abrir sem precisar de conexão de internet.</p>
-          </div>
-          <button class="btn-ghost focusable" data-action="home">← VOLTAR AO INÍCIO</button>
+        <div class="fw-grid" id="fwGrid">
+          <!-- Gerado dinamicamente com botões diretos de 1 clique -->
         </div>
 
-        <div class="cache-panel">
-          <div class="cache-ring"><span id="cachePercent">0%</span></div>
-          <div class="cache-info">
-            <h3 id="cacheTitle">Verificando status do cache...</h3>
-            <p id="cacheText">O AppCache permite que o console acesse a página de exploit mesmo sem conexão com a internet ou quando os servidores estiverem fora do ar.</p>
-            <div class="cache-actions">
-              <button class="btn-primary focusable" data-action="cacheRefresh">
-                <span>RECARREGAR / VERIFICAR CACHE</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="notice-card">
-          <b>Como usar offline no PS4:</b>
-          <ol>
-            <li>Abra a rota do seu firmware com a internet ligada até o cache atingir 100%.</li>
-            <li>Quando a página indicar conclusão, adicione o site aos <b>Favoritos</b> do navegador do PS4.</li>
-            <li>Desconecte o Wi-Fi/cabo de rede nas Configurações do console e teste abrir pelo Favorito.</li>
-          </ol>
+        <!-- MODO TESTE PARA PC -->
+        <div class="pc-bar" id="pcTestBar">
+          <span class="pc-lbl">Testar Detecção (Modo PC):</span>
+          <button class="btn-chip focusable" data-test="5.05">Simular 5.05</button>
+          <button class="btn-chip focusable" data-test="6.72">Simular 6.72</button>
+          <button class="btn-chip focusable" data-test="9.00">Simular 9.00</button>
+          <button class="btn-chip focusable" data-test="11.00">Simular 11.00</button>
         </div>
       </section>
 
-      <!-- TELA DE GUIA DE USO -->
-      <section id="guide" class="screen utility-screen">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">04 / GUIA DE ATIVAÇÃO</div>
-            <h2>Como Executar o Exploit no PS4</h2>
-            <p>Orientações práticas para obter a maior taxa de sucesso na ativação.</p>
+      <!-- MÓDULO 3: DADOS DO SISTEMA -->
+      <section class="box sys-info-box">
+        <div class="info-row">
+          <div class="info-col">
+            <span class="i-lbl">ROTEADOR</span>
+            <span class="i-val">PSX8 Firmware Auto Router</span>
           </div>
-          <button class="btn-ghost focusable" data-action="home">← VOLTAR AO INÍCIO</button>
-        </div>
-
-        <div class="guide-grid">
-          <div class="guide-card">
-            <span class="guide-badge">FW 5.05 / 6.72</span>
-            <h3>Exploit Direto WebKit</h3>
-            <p>Não necessita de pendrive USB. Basta abrir a página do host no navegador do PS4 e aguardar a mensagem de sucesso do GoldHEN. Em caso de "Memória Insuficiente", basta pressionar OK e continuar.</p>
+          <div class="info-col">
+            <span class="i-lbl">PAYLOAD</span>
+            <span class="i-val">GoldHEN v2.4b18 Oficial</span>
           </div>
-
-          <div class="guide-card">
-            <span class="guide-badge">FW 9.00</span>
-            <h3>POOBS4 + Pendrive exfathax</h3>
-            <p>Abra o host 9.00. Quando surgir a mensagem <em>"Insert USB drive now..."</em>, conecte o pendrive com a imagem exfathax em qualquer porta USB do PS4, aguarde a notificação do sistema e pressione OK.</p>
+          <div class="info-col">
+            <span class="i-lbl">OFFLINE CACHE</span>
+            <span class="i-val" id="valCache">Verificando AppCache...</span>
           </div>
-
-          <div class="guide-card">
-            <span class="guide-badge">FW 10.00 a 11.02</span>
-            <h3>CSS Font Face UAF / PPPwn</h3>
-            <p>Para firmwares modernos até 11.00, utilize a rota indicada. O exploit Webkit prepara a memória do navegador para ativação do payload compatível.</p>
-          </div>
-
-          <div class="guide-card">
-            <span class="guide-badge">Dica Importante</span>
-            <h3>Limpeza de Memória</h3>
-            <p>Para evitar travamentos (Kernel Panic): feche outras abas do navegador, limpe o histórico de navegação e cookies antes de disparar o exploit.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- TELA DE CRÉDITOS E INFORMAÇÕES -->
-      <section id="info" class="screen utility-screen">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">SISTEMA & FONTES</div>
-            <h2>Fontes e Compatibilidade</h2>
-            <p>Informações de versão e procedência das rotas.</p>
-          </div>
-          <button class="btn-ghost focusable" data-action="home">← VOLTAR AO INÍCIO</button>
-        </div>
-
-        <div class="info-grid">
-          <div><b>Portal</b><span>Portal PS4 v1.2</span></div>
-          <div><b>Cache do Navegador</b><span id="infoCache">--</span></div>
-          <div><b>Roteador de Hosts</b><span>PSX8 por firmware</span></div>
-          <div><b>GoldHEN Oficial</b><span>v2.4b18 (SiSTR0)</span></div>
-          <div><b>Faixas Suportadas</b><span>5.05 até 11.00</span></div>
-          <div><b>Faixas Experimentais</b><span>11.00 até 13.52</span></div>
-        </div>
-
-        <div class="sources-card">
-          <b>Créditos e Reconhecimentos:</b>
-          <p>GoldHEN por SiSTR0. Hosts, rotas e payloads por PSX8 / PlayStation Pulse, ChendoChap, TheOfficialFloW, Sleirsgoevy, AlAzif e toda a comunidade de pesquisa PS4/WebKit.</p>
         </div>
       </section>
     </main>
 
-    <!-- TELA DE CARREGAMENTO / REDIRECIONAMENTO (LOADER) -->
-    <div id="loader" class="loader" aria-live="polite">
-      <div class="loader-box">
-        <div class="loader-orbit"><span></span></div>
-        <b id="loaderTitle">CARREGANDO HOST</b>
-        <small id="loaderText">Preparando o ambiente do exploit...</small>
-        <div class="loader-track"><span></span></div>
-      </div>
-    </div>
-
-    <!-- RODAPÉ -->
-    <footer class="bottom-bar">
-      <div class="footer-left">
-        <span class="footer-brand">PORTAL PS4</span>
-        <span class="footer-sep">•</span>
-        <span id="footerFw">FW: --</span>
-      </div>
-      <div class="footer-controls-hint">
-        <span><kbd>▲</kbd><kbd>▼</kbd><kbd>◄</kbd><kbd>►</kbd> Navegar</span>
-        <span><kbd>ENTER / ✖</kbd> Selecionar</span>
-        <span><kbd>ESC / ⭘</kbd> Início</span>
-      </div>
-      <div class="footer-right">
-        <span id="version">v1.2.0</span>
-      </div>
+    <!-- RODAPÉ TÉCNICO -->
+    <footer class="sys-foot">
+      <span>PORTAL PS4 // DIRETO & MINIMALISTA</span>
+      <span class="foot-shortcuts"><kbd>▲▼◄►</kbd> Navegar &nbsp;&nbsp;<kbd>ENTER / ✖</kbd> Executar &nbsp;&nbsp;<kbd>ESC / ⭘</kbd> Cancelar</span>
     </footer>
   </div>
 
   <script src="js/firmware.js"></script>
-  <script src="js/payload.js"></script>
   <script src="js/cache.js"></script>
   <script src="js/controller.js"></script>
   <script src="js/app.js"></script>

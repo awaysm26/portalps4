@@ -1,12 +1,86 @@
 <!doctype html>
 <html lang="pt-BR" manifest="cache/cache.manifest">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#101827"><title>Portal PS4</title><link rel="stylesheet" href="css/portal.css"></head>
-<body><div id="app">
-<header class="topbar"><div class="brand"><div class="brand-mark">P4</div><div><div class="brand-title">PORTAL PS4</div><div class="brand-sub">HOST DE CONFIANCA</div></div></div><div class="status-strip"><span id="fwBadge">FW: NAO SELECIONADO</span><span id="cacheBadge">CACHE: VERIFICANDO</span><span id="ghBadge">GOLDHEN: CONSULTAR ROTA</span></div></header>
-<main>
-<section id="home" class="screen active"><div class="hero"><div class="hero-art"><img src="assets/images/portal-image.jpg" alt="Console PlayStation 4"><div class="art-shade"></div></div><div class="hero-copy"><div class="eyebrow">ROTEADOR POR FIRMWARE</div><h1>SEU PS4.<br><span>SEU HOST.</span></h1><p id="summary">Escolha o firmware exato. O portal abre a rota correspondente do PSX8, com o fluxo e os payloads publicados para aquela faixa.</p><button class="primary focusable" data-action="firmware">ESCOLHER FIRMWARE</button><div class="mini-status"><span class="dot"></span><span id="mainStatus">PRONTO PARA CONFIGURAR</span></div></div></div><div class="cards"><button class="card focusable" data-action="firmware"><span>01</span><b>FIRMWARE</b><small id="cardFw">Escolha o seu</small></button><button class="card focusable" data-action="payloads"><span>02</span><b>PAYLOADS</b><small>Catalogo por rota</small></button><button class="card focusable" data-action="cache"><span>03</span><b>CACHE OFFLINE</b><small id="cardCache">Verificando</small></button><button class="card focusable" data-action="info"><span>04</span><b>FONTES</b><small>Versoes e avisos</small></button></div></section>
-<section id="firmware" class="screen"><div class="section-head"><div><div class="eyebrow">FIRMWARE ROUTER</div><h2>Selecione o firmware</h2></div><button class="ghost focusable" data-action="home">VOLTAR</button></div><div id="firmwareGrid" class="firmware-grid"></div><div id="fwDetail" class="detail-panel">Selecione uma faixa para ver a rota recomendada.</div></section>
-<section id="payloads" class="screen"><div class="section-head"><div><div class="eyebrow">CATALOGO</div><h2>Payloads e ferramentas</h2></div><button class="ghost focusable" data-action="home">VOLTAR</button></div><div id="payloadGrid" class="payload-grid"></div></section>
-<section id="cache" class="screen"><div class="section-head"><div><div class="eyebrow">OFFLINE</div><h2>Status do cache</h2></div><button class="ghost focusable" data-action="home">VOLTAR</button></div><div class="cache-panel"><div class="cache-ring"><span id="cachePercent">0%</span></div><div><h3 id="cacheTitle">Verificando cache</h3><p id="cacheText">A interface deste portal usa AppCache para continuar disponivel. Cada host PSX8 instala o proprio cache na primeira visita.</p><button class="primary focusable" data-action="cacheRefresh">ATUALIZAR STATUS</button></div></div><div class="notice">Instale o cache da rota escolhida antes de usar offline. Aguarde a conclusao e feche completamente o navegador do PS4 quando a pagina orientar.</div></section>
-<section id="info" class="screen"><div class="section-head"><div><div class="eyebrow">INFORMACOES</div><h2>Fontes e compatibilidade</h2></div><button class="ghost focusable" data-action="home">VOLTAR</button></div><div class="info-grid"><div><b>Portal</b><span>Portal PS4</span></div><div><b>Cache da interface</b><span id="infoCache">-</span></div><div><b>Roteador</b><span>PSX8 por firmware</span></div><div><b>GoldHEN oficial</b><span>v2.4b18 (release publico)</span></div><div><b>Faixas oficiais do release</b><span>5.05 a 11.00</span></div><div><b>13.02 a 13.52</b><span>Rota PSX8 marcada como pesquisa</span></div></div><div class="sources"><b>Creditos obrigatorios</b><p>Rotas e payloads: PSX8 / PlayStation Pulse e GoldHEN / SiSTR0. Este portal nao redistribui binarios sem verificacao; ele encaminha para as rotas publicadas pelo PSX8, que mantem seus proprios manifests e creditos.</p></div></section>
-</main><div id="loader" class="loader" aria-live="polite"><div class="loader-box"><div class="loader-orbit"><span></span></div><b id="loaderTitle">PREPARANDO HOST</b><small id="loaderText">Verificando rota compativel...</small></div></div><footer><span>PORTAL PS4</span><span id="version">v1.0.0</span><span>PSX8 / GoldHEN</span></footer></div><script src="js/firmware.js"></script><script src="js/payload.js"></script><script src="js/cache.js"></script><script src="js/controller.js"></script><script src="js/app.js"></script></body></html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#07111b">
+  <title>Portal PS4</title>
+  <link rel="stylesheet" href="css/portal.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark"><span>P</span><i>4</i></div>
+        <div><div class="brand-title">PORTAL PS4</div><div class="brand-sub">FIRMWARE HOST SELECTOR</div></div>
+      </div>
+      <nav class="topnav" aria-label="Navegacao principal">
+        <button class="nav-action focusable" data-action="firmware">FIRMWARE</button>
+        <button class="nav-action focusable" data-action="cache">OFFLINE</button>
+        <button class="nav-action focusable" data-action="info">INFO</button>
+      </nav>
+      <div class="status-strip"><span id="fwBadge">FW --</span><span id="cacheBadge">CACHE --</span><span id="ghBadge">GOLDHEN --</span></div>
+    </header>
+
+    <main>
+      <section id="home" class="screen active home-screen">
+        <div class="hero-scene">
+          <img src="assets/images/portal-image.jpg" alt="Console PlayStation 4">
+          <div class="scene-overlay"></div>
+          <div class="scene-grid"></div>
+          <div class="hero-content">
+            <div class="eyebrow"><span class="live-dot"></span>PS4 HOST ROUTER</div>
+            <h1>PRONTO PARA<br><em>O SEU FW.</em></h1>
+            <p id="summary">Selecione o firmware exato e abra o host compativel com um unico comando.</p>
+            <div class="hero-actions">
+              <button class="primary focusable" data-action="firmware"><span>SELECIONAR FIRMWARE</span><b>01</b></button>
+              <button class="secondary focusable" data-action="payloads">VER PAYLOADS</button>
+            </div>
+            <div class="hero-state"><span class="pulse"></span><span id="mainStatus">AGUARDANDO SELECAO</span></div>
+          </div>
+          <div class="scene-caption"><span>PLAYSTATION 4</span><span>ONLINE HOST</span></div>
+        </div>
+
+        <div class="console-deck">
+          <button class="deck-card deck-primary focusable" data-action="firmware">
+            <span class="deck-index">01</span><span class="deck-icon">FW</span><span><b>Firmware</b><small id="cardFw">Escolha a versao do sistema</small></span><i>></i>
+          </button>
+          <button class="deck-card focusable" data-action="payloads">
+            <span class="deck-index">02</span><span class="deck-icon">PL</span><span><b>Payloads</b><small>Catalogo por compatibilidade</small></span><i>></i>
+          </button>
+          <button class="deck-card focusable" data-action="cache">
+            <span class="deck-index">03</span><span class="deck-icon">OF</span><span><b>Offline cache</b><small id="cardCache">Verificando armazenamento</small></span><i>></i>
+          </button>
+        </div>
+      </section>
+
+      <section id="firmware" class="screen utility-screen">
+        <div class="section-head"><div><div class="eyebrow">01 / SYSTEM VERSION</div><h2>Escolha o firmware</h2><p>A rota sera guardada para a proxima abertura.</p></div><button class="ghost focusable" data-action="home">VOLTAR</button></div>
+        <div id="firmwareGrid" class="firmware-grid"></div><div id="fwDetail" class="detail-panel">Selecione uma faixa para ver a rota recomendada.</div>
+      </section>
+
+      <section id="payloads" class="screen utility-screen">
+        <div class="section-head"><div><div class="eyebrow">02 / PAYLOAD CATALOG</div><h2>Payloads e ferramentas</h2><p>Itens exibidos de acordo com o firmware selecionado.</p></div><button class="ghost focusable" data-action="home">VOLTAR</button></div><div id="payloadGrid" class="payload-grid"></div>
+      </section>
+
+      <section id="cache" class="screen utility-screen">
+        <div class="section-head"><div><div class="eyebrow">03 / OFFLINE MODE</div><h2>Cache offline</h2><p>Deixe a interface disponivel para a proxima sessao.</p></div><button class="ghost focusable" data-action="home">VOLTAR</button></div>
+        <div class="cache-panel"><div class="cache-ring"><span id="cachePercent">0%</span></div><div><h3 id="cacheTitle">Verificando cache</h3><p id="cacheText">A interface deste portal usa AppCache. Cada host PSX8 instala o proprio cache na primeira visita.</p><button class="primary focusable" data-action="cacheRefresh"><span>ATUALIZAR STATUS</span><b>03</b></button></div></div>
+        <div class="notice">Instale o cache da rota escolhida antes de usar offline. Aguarde a conclusao e feche completamente o navegador do PS4 quando a pagina orientar.</div>
+      </section>
+
+      <section id="info" class="screen utility-screen">
+        <div class="section-head"><div><div class="eyebrow">SYSTEM / SOURCES</div><h2>Fontes e compatibilidade</h2><p>Informacoes de versao e procedencia das rotas.</p></div><button class="ghost focusable" data-action="home">VOLTAR</button></div>
+        <div class="info-grid"><div><b>Portal</b><span>Portal PS4</span></div><div><b>Cache da interface</b><span id="infoCache">--</span></div><div><b>Roteador</b><span>PSX8 por firmware</span></div><div><b>GoldHEN oficial</b><span>v2.4b18</span></div><div><b>Faixas oficiais</b><span>5.05 a 11.00</span></div><div><b>13.02 a 13.52</b><span>Rota de pesquisa PSX8</span></div></div>
+        <div class="sources"><b>Creditos obrigatorios</b><p>Rotas e payloads: PSX8 / PlayStation Pulse e GoldHEN / SiSTR0. Este portal encaminha para as rotas publicadas pelo PSX8, que mantem seus manifests e creditos.</p></div>
+      </section>
+    </main>
+
+    <div id="loader" class="loader" aria-live="polite"><div class="loader-box"><div class="loader-orbit"><span></span></div><b id="loaderTitle">PREPARANDO HOST</b><small id="loaderText">Verificando rota compativel...</small><div class="loader-track"><span></span></div></div></div>
+    <footer><span>PORTAL PS4</span><span id="version">v1.1.0</span><span>PSX8 / GOLDHEN</span></footer>
+  </div>
+  <script src="js/firmware.js"></script><script src="js/payload.js"></script><script src="js/cache.js"></script><script src="js/controller.js"></script><script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "generated": "2026-09-29",
+  "note": "Compatibility metadata is deliberately conservative. Host slots are placeholders until verified host assets are installed.",
+  "firmwares": [
+    {
+      "id": "505",
+      "range": "5.05",
+      "status": "verified-slot",
+      "host": "hosts/505/"
+    },
+    {
+      "id": "672",
+      "range": "6.72",
+      "status": "verified-slot",
+      "host": "hosts/672/"
+    },
+    {
+      "id": "700",
+      "range": "7.00-8.52",
+      "status": "host-slot",
+      "host": "hosts/700/"
+    },
+    {
+      "id": "900",
+      "range": "9.00-9.60",
+      "status": "host-slot",
+      "host": "hosts/900/"
+    },
+    {
+      "id": "1100",
+      "range": "10.00-11.02",
+      "status": "host-slot",
+      "host": "hosts/1100/"
+    },
+    {
+      "id": "1300",
+      "range": "11.00-13.00",
+      "status": "research",
+      "host": "hosts/1300/"
+    },
+    {
+      "id": "1352",
+      "range": "13.02-13.52",
+      "status": "research",
+      "host": "hosts/1352/"
+    }
+  ]
+}

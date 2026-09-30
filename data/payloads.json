@@ -1,0 +1,32 @@
+{
+  "payloads": [
+    {
+      "id": "ftp",
+      "name": "FTP Server",
+      "type": "integrated",
+      "version": "GoldHEN",
+      "status": "cataloged"
+    },
+    {
+      "id": "ps4debug",
+      "name": "PS4Debug",
+      "type": "external",
+      "version": "verify",
+      "status": "requires-verified-binary"
+    },
+    {
+      "id": "app2usb",
+      "name": "App2USB",
+      "type": "external",
+      "version": "verify",
+      "status": "requires-verified-binary"
+    },
+    {
+      "id": "backup",
+      "name": "Backup / Restore",
+      "type": "external",
+      "version": "verify",
+      "status": "requires-verified-binary"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+name: Validate Portal
+on:
+  push:
+  pull_request:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          for p in pathlib.Path("data").glob("*.json"):
+              json.loads(p.read_text())
+              print("OK", p)
+          PY
+      - name: Check entry point
+        run: test -f index.html

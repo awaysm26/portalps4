@@ -1,0 +1,47 @@
+{
+  "latest_official_release": "2.4b18",
+  "source": "https://github.com/GoldHEN/GoldHEN/releases",
+  "note": "The official GoldHEN release page currently lists v2.4b18 as the latest release found by this build. Do not assume one binary serves every firmware.",
+  "entries": [
+    {
+      "firmware": "5.05",
+      "version": "2.4b18",
+      "status": "verify-binary-before-production"
+    },
+    {
+      "firmware": "6.72",
+      "version": "2.4b18",
+      "status": "verify-binary-before-production"
+    },
+    {
+      "firmware": "9.00",
+      "version": "2.4b18",
+      "status": "verify-binary-before-production"
+    },
+    {
+      "firmware": "9.60",
+      "version": "2.4b18",
+      "status": "verify-binary-before-production"
+    },
+    {
+      "firmware": "10.00/10.01",
+      "version": "2.4b18",
+      "status": "verify-binary-before-production"
+    },
+    {
+      "firmware": "10.50",
+      "version": "2.4b18",
+      "status": "verify-binary-before-production"
+    },
+    {
+      "firmware": "10.70/10.71",
+      "version": "2.4b18",
+      "status": "verify-binary-before-production"
+    },
+    {
+      "firmware": "11.00",
+      "version": "2.4b18",
+      "status": "verify-binary-before-production"
+    }
+  ]
+}

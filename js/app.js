@@ -25,7 +25,7 @@
       if(manualSec){
         manualSec.scrollIntoView({ behavior: 'smooth' });
         setTimeout(function(){
-          var firstBtn = manualSec.querySelector('.fw-btn');
+          var firstBtn = manualSec.querySelector('button');
           if(firstBtn) firstBtn.focus();
         }, 100);
       }
@@ -72,7 +72,7 @@
         }
       }, interval);
 
-      // Foco automático no botão de executar agora
+      // Foco automático imediato no botão de executar agora (para controle de PS4)
       setTimeout(function(){
         var btn = document.getElementById('btnLaunchNow');
         if(btn) btn.focus();
@@ -90,15 +90,14 @@
         var isMatch = (activeId && f.id === activeId);
 
         var btn = document.createElement('button');
-        btn.className = 'fw-btn focusable' + (isMatch ? ' fw-matched' : '');
+        btn.className = 'focusable' + (isMatch ? ' btn-matched' : '');
         btn.innerHTML = 
-          '<div class="fw-left">' +
-            '<span class="fw-title">' + f.label + '</span>' +
-            '<span class="fw-exp">' + f.status + '</span>' +
+          '<div>' +
+            '<span class="btn-lbl">' + f.label + '</span>' +
+            '<span class="btn-exp">' + f.status + ' (' + f.goldhen + ')</span>' +
           '</div>' +
-          '<div class="fw-right">' +
-            '<span class="fw-badge">' + f.exploit + '</span>' +
-            '<span class="fw-run">ABRIR ›</span>' +
+          '<div>' +
+            '<span class="btn-tag">' + f.exploit + ' ›</span>' +
           '</div>';
 
         (function(target){
@@ -116,23 +115,21 @@
       this.systemInfo = sys;
 
       var statConsole = document.getElementById('statConsole');
-      var statCache = document.getElementById('statCache');
       var valCache = document.getElementById('valCache');
 
       // Status do cache offline
       var hasCache = (window.applicationCache && window.applicationCache.status === 1);
-      if(statCache) statCache.innerHTML = hasCache ? 'CACHE: PRONTO' : 'CACHE: WEB';
-      if(valCache) valCache.innerHTML = hasCache ? 'Gravado (Offline Disponível)' : 'Modo Web (Online)';
+      if(valCache) valCache.innerHTML = hasCache ? 'Gravado (Offline Pronto)' : 'Modo Web (Online)';
 
       // Console detectado vs PC
       if(sys.isPS4){
         if(statConsole){
-          statConsole.className = 'stat-badge stat-online';
-          statConsole.innerHTML = '● PS4 DETECTADO: ' + (sys.detectedFw ? 'FW ' + sys.detectedFw : 'CONSOLE');
+          statConsole.className = 'bar-fw';
+          statConsole.innerHTML = 'PS4 DETECTADO: ' + (sys.detectedFw ? 'FW ' + sys.detectedFw : 'CONSOLE');
         }
       } else {
         if(statConsole){
-          statConsole.className = 'stat-badge';
+          statConsole.className = 'bar-fw';
           statConsole.innerHTML = 'MODO PC / WEB';
         }
       }

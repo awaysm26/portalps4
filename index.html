@@ -3,100 +3,87 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0d0e12">
-  <title>PS4 Exploit Host // Auto Launcher</title>
+  <meta name="theme-color" content="#141518">
+  <title>PORTAL PS4 // AUTO LAUNCHER</title>
   <link rel="stylesheet" href="css/portal.css">
 </head>
 <body>
-  <div class="shell">
-    <!-- BARRA SUPERIOR CONSOLE -->
-    <header class="sys-bar">
-      <div class="sys-brand">
-        <span class="sys-tag">PS4</span>
-        <span class="sys-title">HOST AUTO LAUNCHER</span>
-      </div>
-      <div class="sys-status">
-        <span id="statConsole" class="stat-badge">PROCURANDO...</span>
-        <span id="statCache" class="stat-badge">CACHE</span>
-      </div>
+  <div class="app">
+    <!-- BARRA SUPERIOR UNIFICADA (PADRÃO DOS HOSTS) -->
+    <header class="bar">
+      <span><b>PORTAL PS4</b> // HOST SELECTOR & AUTO TRIGGER</span>
+      <span class="bar-fw" id="statConsole">PROCURANDO CONSOLE...</span>
     </header>
 
-    <main class="main-content">
-      <!-- MÓDULO 1: AUTO LAUNCHER DIRETO (DISPARADO AUTOMATICAMENTE NO PS4) -->
-      <section id="autoLaunchSec" class="box auto-box" style="display:none;">
-        <div class="box-head">
-          <span class="head-tag live">● EXPLOIT AUTO-TRIGGER</span>
-          <span class="head-sub">PLAYSTATION 4 DETECTADO</span>
+    <main class="layout">
+      <!-- MÓDULO 1: AUTO LAUNCHER DIRETO (QUANDO NO PS4) -->
+      <section id="autoLaunchSec" class="auto-panel" style="display:none;">
+        <p class="kicker">$ ./detect-firmware --auto-exec</p>
+        <h1>PlayStation 4 <em>Identificado</em></h1>
+        <p class="sub">Seu firmware foi reconhecido e o exploit compatível será executado automaticamente.</p>
+
+        <ul class="boot">
+          <li>[ <b class="ok">ok</b> ] Console: <span id="termDevice">PlayStation 4</span></li>
+          <li>[ <b class="ok">ok</b> ] Firmware: <span id="termFw" class="fw-highlight">--</span></li>
+          <li>[ <b class="ok">ok</b> ] Exploit Alvo: <span id="termHost">--</span></li>
+          <li>[ <b class="ok">ok</b> ] Rota Local: <code id="termRoute">--</code></li>
+          <li class="exec-line">[ <b class="run">exec</b> ] Disparando exploit em <span id="timerNum">2</span>s...</li>
+        </ul>
+
+        <div class="progress-wrap">
+          <div id="progressFill" class="progress-inner"></div>
         </div>
 
-        <div class="term-panel">
-          <div class="term-row"><span class="term-prefix">[SYSTEM]</span> Dispositivo: <b id="termDevice">PlayStation 4</b></div>
-          <div class="term-row"><span class="term-prefix">[SYSTEM]</span> Firmware Identificado: <span id="termFw" class="highlight-fw">--</span></div>
-          <div class="term-row"><span class="term-prefix">[TARGET]</span> Exploit: <span id="termHost">--</span></div>
-          <div class="term-row"><span class="term-prefix">[ROUTE]</span> Destino: <code id="termRoute">--</code></div>
-          <div class="term-row term-alert">
-            <span class="term-prefix">[ACTION]</span> Executando exploit em <b id="timerNum">2</b>s...
-          </div>
-          <div class="progress-track">
-            <div id="progressFill" class="progress-bar"></div>
-          </div>
-        </div>
-
-        <div class="auto-actions">
-          <button id="btnLaunchNow" class="btn btn-action focusable">
-            EXECUTAR AGORA [ ✖ ]
-          </button>
-          <button id="btnCancelAuto" class="btn btn-abort focusable">
-            CANCELAR / SELETOR MANUAL [ ⭘ ]
-          </button>
+        <div class="action-row">
+          <button id="btnLaunchNow" class="btn btn-primary focusable">EXECUTAR AGORA [ ✖ ]</button>
+          <button id="btnCancelAuto" class="btn btn-secondary focusable">CANCELAR / SELETOR MANUAL [ ⭘ ]</button>
         </div>
       </section>
 
-      <!-- MÓDULO 2: SELETOR DIRETO DE FIRMWARES (ACESSO MANUAL IMEDIATO) -->
-      <section id="manualSec" class="box">
-        <div class="box-head">
-          <span class="head-title">SELEÇÃO DIRETA DE FIRMWARE</span>
-          <span class="head-sub" id="manualSub">Clique no firmware do seu console para executar o exploit</span>
-        </div>
+      <!-- MÓDULO 2: SELEÇÃO DIRETA DE FIRMWARE -->
+      <section id="manualSec" class="manual-section">
+        <p class="kicker">$ ./hosts --list</p>
+        <h2>Seletor <em>Direto</em> de Firmware</h2>
+        <p class="sub">Selecione a versão do sistema para carregar o exploit correspondente imediatamente.</p>
 
-        <div class="fw-grid" id="fwGrid">
-          <!-- Gerado dinamicamente com botões diretos de 1 clique -->
+        <div class="grid" id="fwGrid">
+          <!-- Botões gerados dinamicamente via app.js -->
         </div>
 
         <!-- MODO TESTE PARA PC -->
-        <div class="pc-bar" id="pcTestBar">
-          <span class="pc-lbl">Testar Detecção (Modo PC):</span>
-          <button class="btn-chip focusable" data-test="5.05">Simular 5.05</button>
-          <button class="btn-chip focusable" data-test="6.72">Simular 6.72</button>
-          <button class="btn-chip focusable" data-test="9.00">Simular 9.00</button>
-          <button class="btn-chip focusable" data-test="11.00">Simular 11.00</button>
+        <div class="test-bar" id="pcTestBar">
+          <span class="test-title">Simular Detecção (Teste PC):</span>
+          <button class="test-btn focusable" data-test="5.05">5.05</button>
+          <button class="test-btn focusable" data-test="6.72">6.72</button>
+          <button class="test-btn focusable" data-test="7.55">7.55</button>
+          <button class="test-btn focusable" data-test="9.00">9.00</button>
+          <button class="test-btn focusable" data-test="10.01">10.01</button>
+          <button class="test-btn focusable" data-test="11.00">11.00</button>
         </div>
       </section>
 
-      <!-- MÓDULO 3: DADOS DO SISTEMA -->
-      <section class="box sys-info-box">
-        <div class="info-row">
-          <div class="info-col">
-            <span class="i-lbl">ROTEADOR</span>
-            <span class="i-val">PSX8 Firmware Auto Router</span>
+      <!-- MÓDULO 3: STATUS DO SISTEMA E CACHE -->
+      <section class="status-box">
+        <div class="status-grid">
+          <div>
+            <span class="sg-lbl">GOLDHEN</span>
+            <span class="sg-val">v2.4b18 Oficial</span>
           </div>
-          <div class="info-col">
-            <span class="i-lbl">PAYLOAD</span>
-            <span class="i-val">GoldHEN v2.4b18 Oficial</span>
+          <div>
+            <span class="sg-lbl">OFFLINE CACHE</span>
+            <span class="sg-val" id="valCache">Verificando...</span>
           </div>
-          <div class="info-col">
-            <span class="i-lbl">OFFLINE CACHE</span>
-            <span class="i-val" id="valCache">Verificando AppCache...</span>
+          <div>
+            <span class="sg-lbl">ROTEADOR</span>
+            <span class="sg-val">PSX8 Host Router</span>
           </div>
         </div>
       </section>
+
+      <footer class="foot">
+        <span>PORTAL PS4 // RÁPIDO, LEVE & OFFLINE READY</span>
+      </footer>
     </main>
-
-    <!-- RODAPÉ TÉCNICO -->
-    <footer class="sys-foot">
-      <span>PORTAL PS4 // DIRETO & MINIMALISTA</span>
-      <span class="foot-shortcuts"><kbd>▲▼◄►</kbd> Navegar &nbsp;&nbsp;<kbd>ENTER / ✖</kbd> Executar &nbsp;&nbsp;<kbd>ESC / ⭘</kbd> Cancelar</span>
-    </footer>
   </div>
 
   <script src="js/firmware.js"></script>

@@ -1,20 +1,15 @@
-/* ========================================================
-   PORTAL PS4 // TEMA ESCURO DIRETO & MINIMALISTA (PS4 SCENE)
-   Sem glassmorphism, sem blur, carregamento instantâneo.
-   ======================================================== */
 :root {
-  --bg: #0c0e12;
-  --panel: #13171f;
-  --panel-hover: #1b212c;
-  --line: #252a36;
-  --line-active: #3a4256;
+  --bg: #141518;
+  --panel: #1a1c22;
+  --panel-2: #22252e;
+  --line: #2b2f3a;
+  --line-bright: #3f4556;
+  --text: #f5f6f8;
+  --muted: #a6afbc;
+  --dim: #737c8b;
+  --accent: #00e5ff;
   --green: #00e676;
-  --green-bg: rgba(0, 230, 118, 0.12);
-  --cyan: #00e5ff;
-  --yellow: #ffd600;
-  --text: #e6edf3;
-  --text-dim: #8b949e;
-  --font-mono: Consolas, "Liberation Mono", Menlo, Monaco, "Courier New", monospace;
+  --red: #ff5252;
 }
 
 * {
@@ -23,14 +18,25 @@
   padding: 0;
 }
 
+html {
+  background: var(--bg);
+}
+
 html, body {
   min-height: 100%;
+}
+
+body {
   background-color: var(--bg);
+  background-image: linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
   color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  font: 16px/1.4 Consolas, "Liberation Mono", "Segoe UI Mono", monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 button {
@@ -43,384 +49,307 @@ button {
 
 /* FOCO DO CONTROLE PS4 (ALTA VISIBILIDADE) */
 button:focus, .focusable:focus {
-  outline: 2px solid var(--green) !important;
+  outline: 2px solid var(--accent) !important;
   outline-offset: 2px !important;
-  background: var(--panel-hover) !important;
+  background: var(--panel-2) !important;
 }
 
-.shell {
-  max-width: 1000px;
-  margin: 0 auto;
-  min-height: 100vh;
+.app {
   display: flex;
-  flex-direction: column;
-  padding: 0 16px;
-}
-
-/* ========================================================
-   BARRA SUPERIOR
-   ======================================================== */
-.sys-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 20px;
-}
-
-.sys-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sys-tag {
-  background: #1f2430;
-  color: #fff;
-  font-weight: bold;
-  padding: 3px 8px;
-  border: 1px solid var(--line-active);
-  font-size: 12px;
-}
-
-.sys-title {
-  font-size: 13px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  color: var(--text);
-}
-
-.sys-status {
-  display: flex;
-  gap: 8px;
-}
-
-.stat-badge {
-  font-size: 11px;
-  padding: 4px 10px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  color: var(--text-dim);
-}
-
-.stat-online {
-  border-color: var(--green);
-  color: var(--green);
-  background: var(--green-bg);
-}
-
-/* ========================================================
-   CONTEÚDO PRINCIPAL
-   ======================================================== */
-.main-content {
   flex: 1 0 auto;
-  display: flex;
   flex-direction: column;
-  gap: 16px;
+  margin: 0 auto;
+  padding: 14px 24px 12px;
+  width: min(100% - 32px, 1100px);
 }
 
-.box {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  padding: 20px;
-}
-
-.box-head {
-  display: flex;
-  justify-content: space-between;
+/* TOP STATUS BAR */
+.bar {
   align-items: center;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 12px;
+  border: 1px solid var(--line-bright);
+  background: var(--panel);
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+  letter-spacing: .08em;
+  padding: 10px 16px;
+  text-transform: uppercase;
+}
+
+.bar b {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.bar-fw {
+  color: var(--dim);
+}
+
+.bar-fw::before {
+  color: var(--green);
+  content: "● ";
+}
+
+/* LAYOUT */
+.layout {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  padding: 24px 0 0;
+  gap: 20px;
+}
+
+/* HEADINGS & KICKER */
+.kicker {
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: .12em;
+  margin-bottom: 6px;
+}
+
+h1, h2 {
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+h1 em, h2 em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 14px;
   margin-bottom: 16px;
 }
 
-.head-tag {
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.head-tag.live {
-  color: var(--green);
-}
-
-.head-sub {
-  font-size: 11px;
-  color: var(--text-dim);
-}
-
-.head-title {
-  font-size: 13px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  color: #fff;
-}
-
-/* ========================================================
-   AUTO LAUNCHER (TERMINAL STYLE)
-   ======================================================== */
-.auto-box {
-  border-color: var(--green);
-}
-
-.term-panel {
-  background: #08090c;
-  border: 1px solid #1a1e28;
-  padding: 16px;
-  font-size: 13px;
+/* BOOT LOG */
+.boot {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.term-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.term-prefix {
-  color: var(--text-dim);
-  font-size: 11px;
-}
-
-.highlight-fw {
-  color: var(--green);
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.term-panel code {
-  color: var(--cyan);
-  background: #11141c;
-  padding: 2px 6px;
-}
-
-.term-alert {
-  color: var(--yellow);
-  font-weight: bold;
-  margin-top: 6px;
+  gap: 6px;
+  margin: 14px 0;
+  background: #0d0e11;
+  border: 1px solid var(--line);
+  padding: 14px 18px;
   font-size: 14px;
 }
 
-.progress-track {
+.boot b.ok {
+  color: var(--green);
+  font-weight: normal;
+}
+
+.boot b.run {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.boot code {
+  color: var(--accent);
+}
+
+.fw-highlight {
+  color: var(--green);
+  font-weight: bold;
+}
+
+.exec-line {
+  color: #fff;
+  font-weight: bold;
+}
+
+/* PROGRESS */
+.progress-wrap {
   width: 100%;
   height: 6px;
-  background: #141720;
+  background: #0d0e11;
   border: 1px solid var(--line);
-  margin-top: 6px;
+  margin: 12px 0 16px;
   overflow: hidden;
 }
 
-.progress-bar {
+.progress-inner {
   width: 0%;
   height: 100%;
   background: var(--green);
   transition: width 0.05s linear;
 }
 
-.auto-actions {
+/* ACTION BUTTONS */
+.action-row {
   display: flex;
   gap: 12px;
-  margin-top: 18px;
 }
 
 .btn {
-  padding: 12px 20px;
+  border: 1px solid var(--line-bright);
+  font-family: inherit;
+  font-size: 14px;
   font-weight: bold;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  border: 1px solid var(--line);
+  padding: 12px 20px;
   text-align: center;
-  transition: background 0.1s, border-color 0.1s;
+  letter-spacing: .05em;
+  transition: all 0.12s ease;
 }
 
-.btn-action {
+.btn-primary {
   background: var(--green);
-  color: #04140b;
+  color: #05140b;
   border-color: var(--green);
   flex: 1.5;
 }
 
-.btn-action:hover {
+.btn-primary:hover {
   background: #00c853;
 }
 
-.btn-abort {
-  background: #1c202a;
+.btn-secondary {
+  background: var(--panel);
   color: var(--text);
-  border-color: var(--line-active);
+  border-color: var(--line-bright);
   flex: 1;
 }
 
-.btn-abort:hover {
-  background: #252b38;
+.btn-secondary:hover {
+  background: var(--panel-2);
+  border-color: var(--accent);
 }
 
-/* ========================================================
-   GRID DE FIRMWARES
-   ======================================================== */
-.fw-grid {
+/* GRID DOS FIRMWARES */
+.grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
-.fw-btn {
+.grid button {
+  background: var(--panel);
+  border: 1px solid var(--line-bright);
+  color: var(--text);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
-  background: #10131a;
-  border: 1px solid var(--line);
+  font-family: inherit;
+  font-size: 14px;
+  padding: 12px 16px;
   text-align: left;
   transition: all 0.12s ease;
 }
 
-.fw-btn:hover {
-  background: var(--panel-hover);
-  border-color: var(--line-active);
+.grid button:hover {
+  background: var(--panel-2);
+  border-color: var(--accent);
 }
 
-.fw-btn.fw-matched {
+.grid button.btn-matched {
   border-color: var(--green);
-  background: rgba(0, 230, 118, 0.06);
+  background: rgba(0, 230, 118, 0.08);
 }
 
-.fw-left {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.fw-title {
-  font-size: 15px;
+.btn-lbl {
   font-weight: bold;
   color: #fff;
+  display: block;
 }
 
-.fw-exp {
+.btn-exp {
   font-size: 11px;
-  color: var(--text-dim);
+  color: var(--muted);
+  display: block;
+  margin-top: 2px;
 }
 
-.fw-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.fw-badge {
-  font-size: 10px;
+.btn-tag {
+  font-size: 11px;
+  color: var(--accent);
   padding: 2px 6px;
-  background: #1b202c;
-  color: #9cb1c9;
+  background: #0f1013;
   border: 1px solid var(--line);
 }
 
-.fw-run {
-  color: var(--green);
-  font-weight: bold;
-  font-size: 12px;
-}
-
-/* MODO TESTE PC */
-.pc-bar {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
+/* TEST BAR */
+.test-bar {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
   flex-wrap: wrap;
 }
 
-.pc-lbl {
-  font-size: 11px;
-  color: var(--text-dim);
+.test-title {
+  font-size: 12px;
+  color: var(--dim);
 }
 
-.btn-chip {
+.test-btn {
   font-size: 11px;
   padding: 4px 10px;
-  background: #151922;
+  background: var(--panel);
   border: 1px solid var(--line);
-  color: var(--text);
+  color: var(--muted);
 }
 
-.btn-chip:hover {
-  background: var(--line-active);
+.test-btn:hover {
+  color: #fff;
+  border-color: var(--accent);
 }
 
-/* ========================================================
-   META ROW
-   ======================================================== */
-.meta-panel {
-  padding: 14px 20px;
+/* STATUS GRID */
+.status-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 14px 18px;
 }
 
-.info-row {
+.status-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
-.info-col {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.i-lbl {
+.sg-lbl {
+  display: block;
   font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 0.5px;
+  letter-spacing: .1em;
+  color: var(--dim);
+  margin-bottom: 2px;
 }
 
-.i-val {
-  font-size: 12px;
+.sg-val {
+  font-size: 13px;
   font-weight: bold;
-  color: #fff;
-}
-
-/* ========================================================
-   RODAPÉ
-   ======================================================== */
-.sys-foot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0;
-  border-top: 1px solid var(--line);
-  margin-top: 20px;
-  font-size: 11px;
-  color: var(--text-dim);
-}
-
-.foot-shortcuts kbd {
-  background: #171b24;
-  border: 1px solid var(--line);
-  padding: 2px 5px;
   color: var(--text);
-  font-family: inherit;
 }
 
-/* ========================================================
-   RESPONSIVO
-   ======================================================== */
-@media (max-width: 720px) {
-  .fw-grid {
+/* FOOTER */
+.foot {
+  border-top: 1px solid var(--line);
+  color: var(--dim);
+  font-size: 12px;
+  padding: 16px 0;
+  text-align: center;
+  letter-spacing: .08em;
+}
+
+@media (max-width: 680px) {
+  .grid {
     grid-template-columns: 1fr;
   }
-  .info-row {
-    grid-template-columns: repeat(2, 1fr);
+  .status-grid {
+    grid-template-columns: 1fr;
   }
-  .auto-actions {
+  .action-row {
     flex-direction: column;
   }
-  .foot-shortcuts {
-    display: none;
+  .bar {
+    font-size: 11px;
+    padding: 8px 12px;
   }
 }
